@@ -1,19 +1,35 @@
-# Development
+# API Janitor
 
-``npm start``
+## Table of Contents
+ - [Installation](#installation)
+ - [Build](#build)
+ - [Run](#run)
 
-# Run tests
+## Installation
+
+``npm install``
+
+## Build
+
+### Execute tests before build
 
 ``npm t``
 
-# Build
+### Execute build
 
 ``npm run build``
 
-# Run built app
+## Run
+
+### Development
+
+``npm start``
+
+### Production
 
 ``node build/index.js``
 
-## Run build app with debug
+### Production with debug
 
 ``node build/index.js --debug``
+

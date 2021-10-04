@@ -7,7 +7,7 @@
     "start": "ts-node src/index.ts --debug",
     "test": "jest"
   },
-  "author": "velsamm",
+  "author": "https://github.com/velsamm",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "7.15.5",

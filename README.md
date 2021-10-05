@@ -1,5 +1,16 @@
 # API Janitor
 
+TODO бейджи на CI/CD
+
+# Что это?
+
+# Как развернуть и запустить для разработки?
+
+# Как задеплоить?
+
+# Авторы
+
+
 ## Table of Contents
  - [Installation](#installation)
  - [Build](#build)

@@ -2,49 +2,51 @@
 
 TODO бейджи на CI/CD
 
-# Что это?
+## Что это?
 
-# Как развернуть и запустить для разработки?
+Сервис для проверки версии мобильного приложения.
+Предоставляет информацию о наличии обновлений, а также хосты для запросов.
 
-# Как задеплоить?
+## Как развернуть и запустить для разработки?
 
-# Какие endpoint-ы предоставляет
+    - npm install
+    - npm start
 
-Примеры запросов curl и ответов
+## Как задеплоить?
 
-# Авторы
+Сборка:
 
+    - npm t
+    - npm run build
 
-## Table of Contents
- - [Installation](#installation)
- - [Build](#build)
- - [Run](#run)
+Deploy:
 
-## Installation
+    - ???
+    - node build/index.js --debug --port 8080
 
-``npm install``
+## Какие endpoint-ы предоставляет
 
-## Build
+| Endpoint      |   Параметры      | Ответ   |Описание       |
+| ------------- | -----------   | ------------- | --- |
+| GET /janitor      | <p>platform  - android или ios</p><p>osVersion - 13\14\15</p><p>appVersion - 3.0.0</p> | ``{ appLink: string, shouldUpdate: boolean, shouldBlockApp: boolean, urls: string }`` | Проверка версии приложения, а также предоставление списка хостов для запросов |
 
-### Execute tests before build
+<br />
 
-``npm t``
+Пример успешного запроса:
+```
+curl "http://localhost:8080/janitor?platform=ios&osVersion=14&appVersion=1.2.3"   
+{"appLink":"ios_app_store_link","shouldUpdate":false,"shouldBlockApp":false,"urls":["https://bitzlato.com"]}
+```
+<br />
 
-### Execute build
+Пример запроса с ошибкой:
+```
+curl "http://localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.2.3" 
+Bad Request. Available platforms: [android, ios]. You specified: symbian
+```
 
-``npm run build``
+## Авторы
 
-## Run
+https://github.com/velsamm
 
-### Development
-
-``npm start``
-
-### Production
-
-``node build/index.js``
-
-### Production with debug
-
-``node build/index.js --debug``
 

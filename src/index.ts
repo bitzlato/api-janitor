@@ -9,7 +9,7 @@ const program = new Command();
 
 program
     .option('--debug', 'Debug mode <boolean>', false)
-    .option('--port', 'Port <number>', '8080')
+    .option('--port [port]', 'Port <number>', '8080')
     .parse()
 
 const opts = program.opts<IArgs>()

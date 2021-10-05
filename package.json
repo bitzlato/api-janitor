@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "rm -rf build && tsc --build tsconfig.json",
-    "start": "ts-node src/index.ts --debug",
+    "start": "ts-node src/index.ts --debug --port 8080",
     "test": "jest"
   },
   "author": "https://github.com/velsamm",

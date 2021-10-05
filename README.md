@@ -12,14 +12,16 @@ TODO бейджи на CI/CD
     - npm install
     - npm start
 
-## Как задеплоить?
+## Как изменить минимальную допустимую версию?
 
-Сборка:
+## Как указать сообщение для нужной версии?
+
+## Как собрать?
 
     - npm t
     - npm run build
 
-Deploy:
+## Как задеплоить?
 
     - ???
     - node build/index.js --debug --port 8080
@@ -48,5 +50,3 @@ Bad Request. Available platforms: [android, ios]. You specified: symbian
 ## Авторы
 
 https://github.com/velsamm
-
-

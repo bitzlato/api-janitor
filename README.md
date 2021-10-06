@@ -10,12 +10,12 @@
 
 Установка зависимостей и запуск для разработки:
 
-    npm install
-    npm start
+    yarn
+    yarn start
 
 Запуск тестов:
 
-    npm t
+    yarn test
 
 ## Как изменить минимальную допустимую версию?
 
@@ -32,7 +32,7 @@
 
 ## Как собрать?
 
-    npm run build
+    yarn build
 
 ## Как задеплоить?
 
@@ -71,7 +71,7 @@ Date: Wed, 06 Oct 2021 11:44:46 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 
-{"appLink":"ios_app_store_link","message":"upToDate","blockApp":false,"urls":["https://bitzlato.com/api"]}
+{"appLink":"ios_app_store_link","message":"Обновлений нет","blockApp":false,"urls":["https://bitzlato.com/api"]}
 ```
 <br />
 
@@ -87,7 +87,7 @@ Date: Wed, 06 Oct 2021 11:30:36 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 
-{"appLink":"ios_app_store_link","message":"needUpdate","blockApp":false,"urls":["https://test.com/api"]}%
+{"appLink":"ios_app_store_link","message":"Вам желательно обновиться","blockApp":false,"urls":["https://test.com/api"]}%
 ```
 <br />
 
@@ -103,7 +103,7 @@ Date: Wed, 06 Oct 2021 11:29:29 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 
-{"appLink":"ios_app_store_link","message":"needUpdateForce","blockApp":true,"urls":["https://test.com/api"]}%
+{"appLink":"ios_app_store_link","message":"Данная версия приложения больше не поддерживается. Вам необходимо обновить приложение","blockApp":true,"urls":["https://test.com/api"]}%
 ```
 <br />
 

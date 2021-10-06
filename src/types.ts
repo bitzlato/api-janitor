@@ -1,19 +1,13 @@
 export type PlatformType = 'android' | 'ios'
 export interface IVersion {
     version: string;
-    message: Message;
+    message: string;
     blockApp: boolean;
 }
 
 export interface IError {
     status: number;
     message: string;
-}
-
-export enum Message {
-    UP_TO_DATE = 'upToDate',
-    NEED_UPDATE_FORCE = 'needUpdateForce',
-    NEED_UPDATE = 'needUpdate'
 }
 
 export interface IRequestParams {
@@ -24,7 +18,7 @@ export interface IRequestParams {
 
 export interface IResponse {
     appLink: string;
-    message: Message;
+    message: string;
     blockApp: boolean;
     urls: string[]
 }

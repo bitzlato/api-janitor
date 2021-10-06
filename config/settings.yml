@@ -3,15 +3,15 @@ hosts:
 
 versions:
     - version: <3.0.0
-      message: needUpdateForce
+      message: 'Данная версия приложения больше не поддерживается. Вам необходимо обновить приложение'
       blockApp: true
 
     - version: 3.0.0
-      message: needUpdate
+      message: 'Вам желательно обновиться'
       blockApp: false
 
     - version: '>3.0.0'
-      message: upToDate
+      message: 'Обновлений нет'
       blockApp: false
 
 app_links:

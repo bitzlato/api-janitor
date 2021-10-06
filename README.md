@@ -1,6 +1,6 @@
 # API Janitor
 
-TODO бейджи на CI/CD
+[![CI](https://github.com/bitzlato/janitor/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/bitzlato/janitor/actions/workflows/main.yml)
 
 ## Что это?
 
@@ -10,26 +10,34 @@ TODO бейджи на CI/CD
 
 Установка зависимостей и запуск для разработки:
 
-    - npm install
-    - npm start
+    npm install
+    npm start
 
 Запуск тестов:
 
-    - npm t
+    npm t
 
 ## Как изменить минимальную допустимую версию?
 
+1) В файле конфигурации ``config/settings.yml`` в разделе ``versions`` заменить неподдерживаемую
+   ``version`` на необходимую.
+   Например, если минимальная версия теперь ``3.0.1``, а в конфиге стоит ``<3.0.0``, то ``<3.0.0`` заменить на ``<3.0.1``
+   
+1) Заменить минимальную допустимую версию
+
 ## Как указать сообщение для нужной версии?
+
+В файле конфигурации ``config/settings.yml`` в разделе ``versions`` поменять ``message`` на нужное сообщение
+у соответствующей версии
 
 ## Как собрать?
 
-    - npm run build
+    npm run build
 
 ## Как задеплоить?
 
-    - cp config/settings.example.yml config/settings.yml
-    - ???
-    - node build/index.js --debug --port 8080
+    ???
+    node build/index.js --debug --port 8080
 
 ## Какие endpoint-ы предоставляет
 
@@ -68,8 +76,10 @@ Keep-Alive: timeout=5
 <br />
 
 Пример успешного запроса. Приложение устарело, но обновление не требуется:
-```
-% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=3.0.0' -H "Content-Type: application/json" -H "Accept: application/json"
+```sh
+% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=3.0.0' \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 Content-Length: 108
@@ -82,8 +92,10 @@ Keep-Alive: timeout=5
 <br />
 
 Пример успешного запроса. Приложение устарело, требуется обновление:
-```
-% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=2.9.9' -H "Content-Type: application/json" -H "Accept: application/json"
+```sh
+% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=2.9.9' \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 Content-Length: 112
@@ -96,8 +108,10 @@ Keep-Alive: timeout=5
 <br />
 
 Пример запроса с ошибкой:
-```
-% curl -i  'localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.0.0' -H "Content-Type: application/json" -H "Accept: application/json"
+```sh
+% curl -i  'localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.0.0' \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
 HTTP/1.1 400 Bad Request
 Content-Type: application/json; charset=utf-8
 Content-Length: 86

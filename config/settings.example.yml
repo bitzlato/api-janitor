@@ -2,9 +2,18 @@ hosts:
     - http://foo.bar
 
 versions:
-    - version: 1.0.0
-      message: upToDate
+    - version: '<1.0.0'
+      message: 'сообщение об устаревшей версии. требование обновиться'
       blockApp: false
+
+    - version: 1.0.0
+      message: 'сообщение об устаревшей версии'
+      blockApp: false
+
+    - version: 1.0.0
+      message: 'some message'
+      blockApp: false
+
 
 app_links:
     android: android_play_market_link

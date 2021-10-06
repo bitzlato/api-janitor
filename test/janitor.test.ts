@@ -4,10 +4,13 @@ import request from 'supertest'
 import { IResponse } from "../src/types";
 import { checkVersion } from "../src/checkVersion";
 import getConfig from "../src/getConfig";
-import { Message } from "../src/types";
 
 let server: http.Server | null = serverApp
 const config = getConfig()
+
+const upToDateMessage = 'Обновлений нет'
+const needUpdateMessage = 'Вам желательно обновиться'
+const needUpdateForceMessage = 'Данная версия приложения больше не поддерживается. Вам необходимо обновить приложение'
 
 describe('Test /janitor path', () => {
     let expectedResponse: IResponse | null
@@ -45,7 +48,7 @@ describe('Test /janitor path', () => {
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
-                expect(expectedResponse.message).toStrictEqual(Message.UP_TO_DATE)
+                expect(expectedResponse.message).toStrictEqual(upToDateMessage)
                 expect(expectedResponse.blockApp).toBe(false)
 
                 done();
@@ -71,7 +74,7 @@ describe('Test /janitor path', () => {
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
-                expect(expectedResponse.message).toStrictEqual(Message.UP_TO_DATE)
+                expect(expectedResponse.message).toStrictEqual(upToDateMessage)
                 expect(expectedResponse.blockApp).toBe(false)
 
                 done();
@@ -97,7 +100,7 @@ describe('Test /janitor path', () => {
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
-                expect(expectedResponse.message).toStrictEqual(Message.NEED_UPDATE)
+                expect(expectedResponse.message).toStrictEqual(needUpdateMessage)
                 expect(expectedResponse.blockApp).toBe(false)
 
                 done();
@@ -123,7 +126,7 @@ describe('Test /janitor path', () => {
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
-                expect(expectedResponse.message).toStrictEqual(Message.NEED_UPDATE_FORCE)
+                expect(expectedResponse.message).toStrictEqual(needUpdateForceMessage)
                 expect(expectedResponse.blockApp).toBe(true)
 
                 done();

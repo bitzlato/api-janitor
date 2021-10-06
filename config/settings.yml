@@ -1,0 +1,19 @@
+hosts:
+    - https://bitzlato.com/api
+
+versions:
+    - version: <3.0.0
+      message: needUpdateForce
+      blockApp: true
+
+    - version: 3.0.0
+      message: needUpdate
+      blockApp: false
+
+    - version: '>3.0.0'
+      message: upToDate
+      blockApp: false
+
+app_links:
+    android: android_play_market_link
+    ios: ios_app_store_link

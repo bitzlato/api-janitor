@@ -5,6 +5,7 @@ import janitor from "./app";
 import debug from 'debug'
 import { Command } from 'commander';
 import { IArgs } from "./types";
+import { errorHandlerMiddleware, jsonApiMiddleware } from "./middleware";
 const program = new Command();
 
 program
@@ -25,7 +26,13 @@ janitorDebug('Run API Janitor')
 
 const app = express()
 app.disable('x-powered-by')
+app.disable('etag')
+
+app.use(jsonApiMiddleware)
+
 janitor(app)
+
+app.use(errorHandlerMiddleware)
 
 export const server = http.createServer(app)
 

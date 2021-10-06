@@ -1,5 +1,11 @@
-export function checkVersion(): { shouldUpdate: boolean, shouldBlockApp: boolean } {
-    // TODO Implement os and app versions compatibility
+import semver from "semver";
+import { Message } from "./types";
+import getConfig from "./getConfig";
 
-    return { shouldUpdate: false, shouldBlockApp: false }
+export function checkVersion(appVersion: string): { message: Message, blockApp: boolean } {
+    const config = getConfig()
+    const versions = config.versions
+
+    return versions.find((v) => semver.satisfies(appVersion, v.version))
+        || { message: Message.NEED_UPDATE_FORCE, blockApp: true }
 }

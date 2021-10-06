@@ -9,8 +9,14 @@ TODO бейджи на CI/CD
 
 ## Как развернуть и запустить для разработки?
 
+Установка зависимостей и запуск для разработки:
+
     - npm install
     - npm start
+
+Запуск тестов:
+
+    - npm t
 
 ## Как изменить минимальную допустимую версию?
 
@@ -18,7 +24,6 @@ TODO бейджи на CI/CD
 
 ## Как собрать?
 
-    - npm t
     - npm run build
 
 ## Как задеплоить?
@@ -31,21 +36,74 @@ TODO бейджи на CI/CD
 
 | Endpoint      |   Параметры      | Ответ   |Описание       |
 | ------------- | -----------   | ------------- | --- |
-| GET /janitor      | <p>platform  - android или ios</p><p>osVersion - 13\14\15</p><p>appVersion - 3.0.0</p> | ``{ appLink: string, shouldUpdate: boolean, shouldBlockApp: boolean, urls: string }`` | Проверка версии приложения, а также предоставление списка хостов для запросов |
+| GET /janitor      | <p>platform  - android или ios</p><p>osVersion - 13\14\15</p><p>appVersion - 3.0.0</p> | `` { appLink: string, message: string, blockApp: boolean, urls: string[] }`` | Проверка версии приложения, а также предоставление списка хостов для запросов |
 
 <br />
 
-Пример успешного запроса:
+
+Соблюдаем https://jsonapi.org/format/#content-negotiation.
+Клиент обязательно должен указать в заголовках запроса:
+
 ```
-curl "http://localhost:8080/janitor?platform=ios&osVersion=14&appVersion=1.2.3"   
-{"appLink":"ios_app_store_link","shouldUpdate":false,"shouldBlockApp":false,"urls":["https://bitzlato.com"]}
+Content-Type: application/json
+Accept: application/json
+```
+
+<br />
+
+Пример успешного запроса. Обновление приложения не требуется:
+```
+% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=1.0.0' -H "Content-Type: application/json" -H "Accept: application/json"
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 102
+Date: Wed, 06 Oct 2021 10:31:32 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"appLink":"ios_app_store_link","message":"upToDate","blockApp":false,"urls":["https://test.com/api"]}%
+```
+<br />
+
+Пример успешного запроса. Приложение устарело, но обновление не требуется:
+```
+% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=3.0.0' -H "Content-Type: application/json" -H "Accept: application/json"
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 108
+Date: Wed, 06 Oct 2021 11:30:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"appLink":"ios_app_store_link","message":"needUpdate","blockApp":false,"urls":["https://test.com/api"]}%
+```
+<br />
+
+Пример успешного запроса. Приложение устарело, требуется обновление:
+```
+% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=2.9.9' -H "Content-Type: application/json" -H "Accept: application/json"
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 112
+Date: Wed, 06 Oct 2021 11:29:29 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"appLink":"ios_app_store_link","message":"needUpdateForce","blockApp":true,"urls":["https://test.com/api"]}%
 ```
 <br />
 
 Пример запроса с ошибкой:
 ```
-curl "http://localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.2.3" 
-Bad Request. Available platforms: [android, ios]. You specified: symbian
+% % curl -i  'localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.0.0' -H "Content-Type: application/json" -H "Accept: application/json"
+HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
+Content-Length: 86
+Date: Wed, 06 Oct 2021 10:31:50 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Available platforms: [android, ios]. You specified: symbian","status":400}%
 ```
 
 ## Авторы

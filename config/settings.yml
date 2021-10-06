@@ -7,6 +7,10 @@ versions:
       blockApp: true
 
     - version: 3.0.0
+      message: needUpdate
+      blockApp: false
+
+    - version: '>3.0.0'
       message: upToDate
       blockApp: false
 

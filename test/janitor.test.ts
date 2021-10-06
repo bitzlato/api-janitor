@@ -4,6 +4,7 @@ import request from 'supertest'
 import { IResponse } from "../src/types";
 import { checkVersion } from "../src/checkVersion";
 import getConfig from "../src/getConfig";
+import { Message } from "../src/types";
 
 let server: http.Server | null = serverApp
 const config = getConfig()
@@ -44,6 +45,8 @@ describe('Test /janitor path', () => {
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
+                expect(expectedResponse.message).toStrictEqual(Message.UP_TO_DATE)
+                expect(expectedResponse.blockApp).toBe(false)
 
                 done();
             });
@@ -68,12 +71,14 @@ describe('Test /janitor path', () => {
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
+                expect(expectedResponse.message).toStrictEqual(Message.UP_TO_DATE)
+                expect(expectedResponse.blockApp).toBe(false)
 
                 done();
             });
     })
 
-    test('test with all valid params ios, but appVersion = 0.9.8', done => {
+    test('test with appVersion = 0.9.8', done => {
         request(server)
             .get("/janitor?platform=ios&osVersion=14&appVersion=0.9.8")
             .set('Content-Type', 'application/json')
@@ -92,10 +97,40 @@ describe('Test /janitor path', () => {
 
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
+                expect(expectedResponse.message).toStrictEqual(Message.NEED_UPDATE)
+                expect(expectedResponse.blockApp).toBe(false)
 
                 done();
             });
     })
+
+    test('test with appVersion = 0.8.9', done => {
+        request(server)
+            .get("/janitor?platform=ios&osVersion=14&appVersion=0.8.9")
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
+            .then(response => {
+                const appVersion = '0.8.9'
+
+                const { message, blockApp } = checkVersion(appVersion)
+
+                expectedResponse = {
+                    appLink: config.app_links.ios,
+                    message,
+                    blockApp,
+                    urls: config.hosts
+                }
+
+                expect(response.statusCode).toBe(200);
+                expect(response.body).toStrictEqual(expectedResponse)
+                expect(expectedResponse.message).toStrictEqual(Message.NEED_UPDATE_FORCE)
+                expect(expectedResponse.blockApp).toBe(true)
+
+                done();
+            });
+    })
+
+
 
     test('test with wrong params platform = symbian', done => {
         request(server)

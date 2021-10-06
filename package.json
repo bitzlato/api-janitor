@@ -17,7 +17,7 @@
     "@types/express": "4.17.13",
     "@types/jest": "27.0.2",
     "@types/js-yaml": "4.0.3",
-    "@types/semver": "^7.3.8",
+    "@types/semver": "7.3.8",
     "@types/supertest": "2.0.11",
     "babel-jest": "27.2.4",
     "jest": "27.2.4",
@@ -32,6 +32,9 @@
     "debug": "4.3.2",
     "express": "4.17.1",
     "js-yaml": "4.1.0",
-    "semver": "^7.3.5"
+    "semver": "7.3.5"
+  },
+  "engines": {
+    "node": ">=14.16.0"
   }
 }

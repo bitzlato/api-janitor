@@ -1,0 +1,11 @@
+hosts:
+    - http://foo.bar
+
+versions:
+    - version: 1.0.0
+      message: upToDate
+      blockApp: false
+
+app_links:
+    android: android_play_market_link
+    ios: ios_app_store_link

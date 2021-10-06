@@ -23,6 +23,7 @@ TODO бейджи на CI/CD
 
 ## Как задеплоить?
 
+    - cp config/settings.example.yml config/settings.yml
     - ???
     - node build/index.js --debug --port 8080
 

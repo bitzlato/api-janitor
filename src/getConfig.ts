@@ -4,7 +4,11 @@ import { IConfig } from "./types";
 
 function getConfig(): IConfig {
     try {
-        return yaml.load(fs.readFileSync(__dirname.concat('/../conf.yaml'), 'utf-8')) as IConfig
+        if (process.env.NODE_ENV === 'UNIT_TEST') {
+            return yaml.load(fs.readFileSync(__dirname.concat('/../config/settings.yml'), 'utf-8')) as IConfig
+        } else {
+            return yaml.load(fs.readFileSync(__dirname.concat('/../test/settings.tests.yml'), 'utf-8')) as IConfig
+        }
     } catch (e) {
         throw new Error(`Error during reading yaml: ${e}`)
     }

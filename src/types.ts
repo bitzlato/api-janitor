@@ -1,4 +1,20 @@
 export type PlatformType = 'android' | 'ios'
+export interface IVersion {
+    version: string;
+    message: Message;
+    blockApp: boolean;
+}
+
+export interface IError {
+    status: number;
+    message: string;
+}
+
+export enum Message {
+    UP_TO_DATE = 'upToDate',
+    NEED_UPDATE_FORCE = 'needUpdateForce',
+    NEED_UPDATE = 'needUpdate'
+}
 
 export interface IRequestParams {
     platform: PlatformType;
@@ -8,14 +24,14 @@ export interface IRequestParams {
 
 export interface IResponse {
     appLink: string;
-    shouldUpdate: boolean;
-    shouldBlockApp: boolean;
+    message: Message;
+    blockApp: boolean;
     urls: string[]
 }
 
 export interface IConfig {
-    api_hosts: { production: string[] },
-    versions: { stable: { major: number, minor: number, patch: number | string } },
+    hosts: string[],
+    versions: IVersion[],
     app_links: { android: string, ios: string }
 }
 

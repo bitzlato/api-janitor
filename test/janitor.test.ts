@@ -7,16 +7,12 @@ import getConfig from "../src/getConfig";
 
 let server: http.Server | null = serverApp
 const config = getConfig()
-const { shouldUpdate, shouldBlockApp } = checkVersion()
-const expectedResponse: IResponse = {
-    appLink: config.app_links.android,
-    shouldUpdate,
-    shouldBlockApp,
-    urls: config.api_hosts.production
-}
 
 describe('Test /janitor path', () => {
+    let expectedResponse: IResponse | null
+
     beforeEach(() => {
+        expectedResponse = null
         server = serverApp
     })
 
@@ -25,14 +21,27 @@ describe('Test /janitor path', () => {
             server.close()
         }
 
+        expectedResponse = null
         server = null
     })
 
     test('test with all valid params android', done => {
         request(server)
-            .get("/janitor?platform=android&osVersion=14&appVersion=1.2.3")
+            .get("/janitor?platform=android&osVersion=14&appVersion=1.0.0")
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
             .then(response => {
-                expectedResponse.appLink = config.app_links.android
+                const appVersion = '1.0.0'
+
+                const { message, blockApp } = checkVersion(appVersion)
+
+                expectedResponse = {
+                    appLink: config.app_links.android,
+                        message,
+                        blockApp,
+                        urls: config.hosts
+                }
+
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
 
@@ -42,9 +51,21 @@ describe('Test /janitor path', () => {
 
     test('test with all valid params ios', done => {
         request(server)
-            .get("/janitor?platform=ios&osVersion=14&appVersion=1.2.3")
+            .get("/janitor?platform=ios&osVersion=14&appVersion=1.0.0")
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
             .then(response => {
-                expectedResponse.appLink = config.app_links.ios
+                const appVersion = '1.0.0'
+
+                const { message, blockApp } = checkVersion(appVersion)
+
+                expectedResponse = {
+                    appLink: config.app_links.ios,
+                    message,
+                    blockApp,
+                    urls: config.hosts
+                }
+
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toStrictEqual(expectedResponse)
 
@@ -52,11 +73,57 @@ describe('Test /janitor path', () => {
             });
     })
 
-    test('test with wrong params', done => {
+    test('test with all valid params ios, but appVersion = 0.9.8', done => {
         request(server)
-            .get("/janitor?platform=symbian&osVersion=14&appVersion=1.2.3")
+            .get("/janitor?platform=ios&osVersion=14&appVersion=0.9.8")
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
+            .then(response => {
+                const appVersion = '0.9.8'
+
+                const { message, blockApp } = checkVersion(appVersion)
+
+                expectedResponse = {
+                    appLink: config.app_links.ios,
+                    message,
+                    blockApp,
+                    urls: config.hosts
+                }
+
+                expect(response.statusCode).toBe(200);
+                expect(response.body).toStrictEqual(expectedResponse)
+
+                done();
+            });
+    })
+
+    test('test with wrong params platform = symbian', done => {
+        request(server)
+            .get("/janitor?platform=symbian&osVersion=14&appVersion=1.0.0")
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
             .then(response => {
                 expect(response.statusCode).toBe(400);
+                expect(response.body).toStrictEqual({ message: "Available platforms: [android, ios]. You specified: symbian", status: 400 })
+                done();
+            });
+    })
+
+    test('with without content-type = application/json header', done => {
+        request(server)
+            .get("/janitor?platform=symbian&osVersion=14&appVersion=1.0.0")
+            .then(response => {
+                expect(response.statusCode).toBe(415);
+                done();
+            });
+    })
+
+    test('with without accept = application/json header', done => {
+        request(server)
+            .get("/janitor?platform=symbian&osVersion=14&appVersion=1.0.0")
+            .set('Content-Type', 'application/json')
+            .then(response => {
+                expect(response.statusCode).toBe(406);
                 done();
             });
     })

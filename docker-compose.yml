@@ -1,0 +1,9 @@
+version: "3.4"
+
+services:
+  janitor:
+    build: .
+    container_name: janitor
+    ports: 
+      - "8081:8080"
+    restart: always

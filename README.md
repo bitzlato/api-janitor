@@ -51,8 +51,11 @@ Accept: application/json
 <br />
 
 Пример успешного запроса. Обновление приложения не требуется:
-```
-% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=3.0.1' -H "Content-Type: application/json" -H "Accept: application/json"
+```sh
+% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=3.0.1' \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+    
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 Content-Length: 106
@@ -60,7 +63,7 @@ Date: Wed, 06 Oct 2021 11:44:46 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 
-{"appLink":"ios_app_store_link","message":"upToDate","blockApp":false,"urls":["https://bitzlato.com/api"]}%
+{"appLink":"ios_app_store_link","message":"upToDate","blockApp":false,"urls":["https://bitzlato.com/api"]}
 ```
 <br />
 
@@ -94,7 +97,7 @@ Keep-Alive: timeout=5
 
 Пример запроса с ошибкой:
 ```
-% % curl -i  'localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.0.0' -H "Content-Type: application/json" -H "Accept: application/json"
+% curl -i  'localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.0.0' -H "Content-Type: application/json" -H "Accept: application/json"
 HTTP/1.1 400 Bad Request
 Content-Type: application/json; charset=utf-8
 Content-Length: 86

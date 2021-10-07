@@ -37,8 +37,7 @@
 
 ## Как задеплоить?
 
-    ???
-    node build/index.js --debug --port 8080
+    docker-compose up --build -d
 
 ## Какие endpoint-ы предоставляет
 

@@ -35,9 +35,14 @@
 
     yarn build
 
-## Как задеплоить?
+## Как запустить локально?
 
     docker-compose up --build -d
+
+## Как задеплоить на сервер?
+
+    1) прописать [переменные окружения](https://direnv.net) APP_USER и APP_HOST
+    2) make deploy
 
 ## Какие endpoint-ы предоставляет
 

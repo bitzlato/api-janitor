@@ -1,10 +1,11 @@
-# API Janitor
+# Janitor
 
 [![CI](https://github.com/bitzlato/janitor/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/bitzlato/janitor/actions/workflows/main.yml)
 
 ## Что это?
 
-Сервис предоставляет информацию о наличии обновлений, а также хосты для запросов.
+Сервис предоставляет информацию о наличии обновлений мобильного приложения,
+а также список URL-ов для запросов к API.
 
 ## Как развернуть и запустить для разработки?
 

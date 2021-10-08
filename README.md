@@ -41,8 +41,9 @@
 
 ## Как задеплоить на сервер?
 
-    1) прописать [переменные окружения](https://direnv.net) APP_USER и APP_HOST
-    2) make deploy
+Прописать [переменные окружения](https://direnv.net) `APP_USER` и `APP_HOST`
+ 
+    make deploy
 
 ## Какие endpoint-ы предоставляет
 

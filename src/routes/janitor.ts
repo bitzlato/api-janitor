@@ -1,9 +1,9 @@
 import { Express } from "express";
-import { IRequestParams, IResponse } from "./types";
-import getConfig from "./getConfig";
-import { checkVersion } from "./checkVersion";
-import { HttpException } from "./error";
-import Logger from "./logger";
+import { IRequestParams, IResponse } from "../types";
+import getConfig from "../getConfig";
+import { checkVersion } from "../checkVersion";
+import { HttpException } from "../error";
+import Logger from "../logger";
 const config = getConfig()
 
 function janitor(app: Express) {
@@ -35,7 +35,7 @@ function janitor(app: Express) {
 
             Logger.debug(`${req.url} --- ${JSON.stringify(response)}`)
             res.json(response)
-    })
+        })
 }
 
 export default janitor

@@ -15,6 +15,7 @@ const Logger = winston.createLogger({
         timestamp(),
         myFormat
     ),
+    silent: false,
     transports: [
         new winston.transports.File({
             filename: 'log/logfile',

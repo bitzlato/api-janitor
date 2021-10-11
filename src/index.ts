@@ -1,7 +1,7 @@
 import express from 'express'
 import http from 'http'
 import terminus from '@godaddy/terminus'
-import janitor from "./app";
+import routes from "./routes";
 import { Command } from 'commander';
 import { IArgs } from "./types";
 import { errorHandlerMiddleware, jsonApiMiddleware, loggerMiddleware } from "./middleware";
@@ -13,6 +13,7 @@ program
     .option('--level [level]', `Logger level <string>. One of following options: [ error, info, debug ];`, 'info')
     .option('--silent', 'Disable logs <boolean>', false)
     .option('--port [port]', 'Port <number>', '8080')
+    .allowUnknownOption()
     .parse()
 
 const opts = program.opts<IArgs>()
@@ -22,8 +23,14 @@ const port = opts.port
 const level = opts.level
 const silent = opts.silent
 Logger.level = level
-Logger.silent = silent
-Logger.info('Run Janitor')
+
+if (process.env.NODE_ENV === 'UNIT_TEST') {
+    Logger.silent = true
+} else {
+    Logger.silent = silent
+}
+
+Logger.info(`Run Janitor. Version: ${require('../package.json').version}`)
 
 // Express app
 const app = express()
@@ -34,7 +41,7 @@ app.use(jsonApiMiddleware)
 app.use(loggerMiddleware)
 
 // Janitor app
-janitor(app)
+routes(app)
 
 // error handler
 app.use(errorHandlerMiddleware)

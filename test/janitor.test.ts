@@ -5,28 +5,26 @@ import { IResponse } from "../src/types";
 import { checkVersion } from "../src/checkVersion";
 import getConfig from "../src/getConfig";
 
-let server: http.Server | null = serverApp
-
 const upToDateMessage = 'Обновлений нет'
 const needUpdateMessage = 'Вам желательно обновиться'
 const needUpdateForceMessage = 'Данная версия приложения больше не поддерживается. Вам необходимо обновить приложение'
 
-describe('Test /janitor path', () => {
+describe('Test /janitor endpoint', () => {
+    const server: http.Server = serverApp
+
     let expectedResponse: IResponse | null
     const config = getConfig()
 
     beforeEach(() => {
         expectedResponse = null
-        server = serverApp
     })
 
     afterEach(() => {
-        if (!!server) {
-            server.close()
-        }
-
         expectedResponse = null
-        server = null
+    })
+
+    afterAll(() => {
+        server.close()
     })
 
     test('test with all valid params android', done => {

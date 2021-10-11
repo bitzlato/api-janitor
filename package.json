@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rm -rf build && tsc --build tsconfig.json",
     "start": "ts-node src/index.ts --port 8080",
-    "test": "NODE_ENV=UNIT_TEST jest"
+    "test": "NODE_ENV=UNIT_TEST jest --silent"
   },
   "author": "https://github.com/velsamm",
   "license": "ISC",

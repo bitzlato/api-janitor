@@ -11,6 +11,7 @@ const program = new Command();
 
 program
     .option('--level [level]', `Logger level <string>. One of following options: [ error, info, debug ];`, 'info')
+    .option('--silent', 'Disable logs <boolean>', false)
     .option('--port [port]', 'Port <number>', '8080')
     .parse()
 
@@ -19,7 +20,9 @@ const port = opts.port
 
 // Logger
 const level = opts.level
+const silent = opts.silent
 Logger.level = level
+Logger.silent = silent
 Logger.info('Run Janitor')
 
 // Express app

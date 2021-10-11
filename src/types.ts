@@ -5,6 +5,11 @@ export interface IVersion {
     blockApp: boolean;
 }
 
+export interface IError {
+    status: number;
+    message: string;
+}
+
 export interface IRequestParams {
     platform: PlatformType;
     osVersion: string;
@@ -32,5 +37,6 @@ export enum LoggerLevel {
 
 export interface IArgs {
     level: LoggerLevel
+    silent: boolean
     port: number
 }

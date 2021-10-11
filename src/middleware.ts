@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from 'express'
 import { HttpException } from "./error";
 import http from "http";
 import Logger from "./logger";
+import {IError} from "./types";
 
 export function loggerMiddleware(req: Request, res: Response, next: NextFunction) {
     Logger.debug(
@@ -35,7 +36,8 @@ export function errorHandlerMiddleware(err: unknown, req: Request, res: Response
     Logger.error(err)
 
     if (err instanceof HttpException) {
-        return res.status(err.status).json(err)
+        const errorPayload: IError = { message: err.message, status: err.status }
+        return res.status(err.status).json(errorPayload)
     }
 
     next()

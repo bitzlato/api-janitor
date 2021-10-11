@@ -3,13 +3,12 @@ import { IRequestParams, IResponse } from "./types";
 import getConfig from "./getConfig";
 import { checkVersion } from "./checkVersion";
 import { HttpException } from "./error";
+const config = getConfig()
 
 function janitor(app: Express) {
     app.get(
         '/janitor',
         (req, res, next) => {
-            const config = getConfig()
-
             const requestParams = req.query as unknown as IRequestParams
 
             const platform = requestParams.platform

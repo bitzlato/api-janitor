@@ -1,19 +1,20 @@
-hosts:
-    - https://test.com/api
+default:
+    hosts:
+        - https://test.com/api
 
-versions:
-    - version: <0.9.1
-      message: 'Данная версия приложения больше не поддерживается. Вам необходимо обновить приложение'
-      blockApp: true
+    versions:
+        - version: <0.9.1
+          message: 'Данная версия приложения больше не поддерживается. Вам необходимо обновить приложение'
+          blockApp: true
 
-    - version: '>=0.9.2 <1.0.0'
-      message: 'Вам желательно обновиться'
-      blockApp: false
+        - version: '>=0.9.2 <1.0.0'
+          message: 'Вам желательно обновиться'
+          blockApp: false
 
-    - version: 1.0.0
-      message: 'Обновлений нет'
-      blockApp: false
+        - version: 1.0.0
+          message: 'Обновлений нет'
+          blockApp: false
 
-app_links:
-    android: android_play_market_link
-    ios: ios_app_store_link
+    app_links:
+        android: android_play_market_link
+        ios: ios_app_store_link

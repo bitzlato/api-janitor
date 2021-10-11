@@ -6,7 +6,6 @@ import { checkVersion } from "../src/checkVersion";
 import getConfig from "../src/getConfig";
 
 let server: http.Server | null = serverApp
-const config = getConfig()
 
 const upToDateMessage = 'Обновлений нет'
 const needUpdateMessage = 'Вам желательно обновиться'
@@ -14,6 +13,7 @@ const needUpdateForceMessage = 'Данная версия приложения �
 
 describe('Test /janitor path', () => {
     let expectedResponse: IResponse | null
+    const config = getConfig()
 
     beforeEach(() => {
         expectedResponse = null
@@ -37,7 +37,7 @@ describe('Test /janitor path', () => {
             .then(response => {
                 const appVersion = '1.0.0'
 
-                const { message, blockApp } = checkVersion(appVersion)
+                const { message, blockApp } = checkVersion(appVersion, config)
 
                 expectedResponse = {
                     appLink: config.app_links.android,
@@ -63,7 +63,7 @@ describe('Test /janitor path', () => {
             .then(response => {
                 const appVersion = '1.0.0'
 
-                const { message, blockApp } = checkVersion(appVersion)
+                const { message, blockApp } = checkVersion(appVersion, config)
 
                 expectedResponse = {
                     appLink: config.app_links.ios,
@@ -89,7 +89,7 @@ describe('Test /janitor path', () => {
             .then(response => {
                 const appVersion = '0.9.8'
 
-                const { message, blockApp } = checkVersion(appVersion)
+                const { message, blockApp } = checkVersion(appVersion, config)
 
                 expectedResponse = {
                     appLink: config.app_links.ios,
@@ -115,7 +115,7 @@ describe('Test /janitor path', () => {
             .then(response => {
                 const appVersion = '0.8.9'
 
-                const { message, blockApp } = checkVersion(appVersion)
+                const { message, blockApp } = checkVersion(appVersion, config)
 
                 expectedResponse = {
                     appLink: config.app_links.ios,

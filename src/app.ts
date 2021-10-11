@@ -23,7 +23,7 @@ function janitor(app: Express) {
                 throw new HttpException(400, 'Available platforms: [android, ios]. You specified: '.concat(platform) )
             }
 
-            const { message, blockApp } = checkVersion(appVersion)
+            const { message, blockApp } = checkVersion(appVersion, config)
 
             const response: IResponse = {
                 appLink: config.app_links[platform],

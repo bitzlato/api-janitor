@@ -29,7 +29,14 @@ export interface IConfig {
     app_links: { android: string, ios: string }
 }
 
+export enum LoggerLevel {
+    ERROR = 'error',
+    INFO = 'info',
+    DEBUG = 'debug',
+}
+
 export interface IArgs {
-    debug: boolean
+    level: LoggerLevel
+    silent: boolean
     port: number
 }

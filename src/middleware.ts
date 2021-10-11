@@ -1,9 +1,20 @@
 import type { NextFunction, Request, Response } from 'express'
-import debug from "debug";
 import { HttpException } from "./error";
 import http from "http";
+import Logger from "./logger";
 
-const janitorError = debug('janitor:error')
+export function loggerMiddleware(req: Request, res: Response, next: NextFunction) {
+    Logger.debug(
+        JSON.stringify({
+            method: req.method,
+            query: req.query,
+            headers: req.headers,
+            url: req.url
+        }, null, 2)
+    )
+
+    next()
+}
 
 export function jsonApiMiddleware(req: Request, res: Response, next: NextFunction) {
     // const headerContentType = req.header('content-type')
@@ -21,11 +32,11 @@ export function jsonApiMiddleware(req: Request, res: Response, next: NextFunctio
 }
 
 export function errorHandlerMiddleware(err: unknown, req: Request, res: Response, next: NextFunction) {
+    Logger.error(err)
+
     if (err instanceof HttpException) {
         return res.status(err.status).json(err)
     }
-
-    janitorError(err)
 
     next()
 }

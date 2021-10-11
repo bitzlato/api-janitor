@@ -3,6 +3,7 @@ import { IRequestParams, IResponse } from "./types";
 import getConfig from "./getConfig";
 import { checkVersion } from "./checkVersion";
 import { HttpException } from "./error";
+import Logger from "./logger";
 const config = getConfig()
 
 function janitor(app: Express) {
@@ -32,6 +33,7 @@ function janitor(app: Express) {
                 urls: config.hosts
             }
 
+            Logger.debug(`${req.url} --- ${JSON.stringify(response)}`)
             res.json(response)
     })
 }

@@ -5,11 +5,6 @@ export interface IVersion {
     blockApp: boolean;
 }
 
-export interface IError {
-    status: number;
-    message: string;
-}
-
 export interface IRequestParams {
     platform: PlatformType;
     osVersion: string;
@@ -29,7 +24,13 @@ export interface IConfig {
     app_links: { android: string, ios: string }
 }
 
+export enum LoggerLevel {
+    ERROR = 'error',
+    INFO = 'info',
+    DEBUG = 'debug',
+}
+
 export interface IArgs {
-    debug: boolean
+    level: LoggerLevel
     port: number
 }

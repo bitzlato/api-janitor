@@ -32,7 +32,7 @@ describe('Test /janitor path', () => {
     test('test with all valid params android', done => {
         request(server)
             .get("/janitor?platform=android&osVersion=14&appVersion=1.0.0")
-            .set('Content-Type', 'application/json')
+
             .set('Accept', 'application/json')
             .then(response => {
                 const appVersion = '1.0.0'
@@ -58,7 +58,7 @@ describe('Test /janitor path', () => {
     test('test with all valid params ios', done => {
         request(server)
             .get("/janitor?platform=ios&osVersion=14&appVersion=1.0.0")
-            .set('Content-Type', 'application/json')
+
             .set('Accept', 'application/json')
             .then(response => {
                 const appVersion = '1.0.0'
@@ -84,7 +84,7 @@ describe('Test /janitor path', () => {
     test('test with appVersion = 0.9.8', done => {
         request(server)
             .get("/janitor?platform=ios&osVersion=14&appVersion=0.9.8")
-            .set('Content-Type', 'application/json')
+
             .set('Accept', 'application/json')
             .then(response => {
                 const appVersion = '0.9.8'
@@ -110,7 +110,7 @@ describe('Test /janitor path', () => {
     test('test with appVersion = 0.8.9', done => {
         request(server)
             .get("/janitor?platform=ios&osVersion=14&appVersion=0.8.9")
-            .set('Content-Type', 'application/json')
+
             .set('Accept', 'application/json')
             .then(response => {
                 const appVersion = '0.8.9'
@@ -138,7 +138,7 @@ describe('Test /janitor path', () => {
     test('test with wrong params platform = symbian', done => {
         request(server)
             .get("/janitor?platform=symbian&osVersion=14&appVersion=1.0.0")
-            .set('Content-Type', 'application/json')
+
             .set('Accept', 'application/json')
             .then(response => {
                 expect(response.statusCode).toBe(400);
@@ -147,19 +147,9 @@ describe('Test /janitor path', () => {
             });
     })
 
-    test('with without content-type = application/json header', done => {
+    test('GET request without accept = application/json header', done => {
         request(server)
             .get("/janitor?platform=symbian&osVersion=14&appVersion=1.0.0")
-            .then(response => {
-                expect(response.statusCode).toBe(415);
-                done();
-            });
-    })
-
-    test('with without accept = application/json header', done => {
-        request(server)
-            .get("/janitor?platform=symbian&osVersion=14&appVersion=1.0.0")
-            .set('Content-Type', 'application/json')
             .then(response => {
                 expect(response.statusCode).toBe(406);
                 done();

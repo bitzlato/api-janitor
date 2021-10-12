@@ -3,7 +3,7 @@ import { load } from "node-yaml-config";
 
 function getConfig(): IConfig {
     try {
-        if (process.env.NODE_ENV === 'UNIT_TEST') {
+        if (process.env.NODE_ENV === 'development') {
             return load(__dirname.concat('/../test/settings.tests.yml')) as IConfig
         } else {
             return load(__dirname.concat('/../config/settings.yml')) as IConfig

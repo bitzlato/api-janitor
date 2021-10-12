@@ -18,3 +18,7 @@ default:
     app_links:
         android: android_play_market_link
         ios: ios_app_store_link
+
+    bugsnag:
+        app_key: 'fc1b78faabe94a0dd9a049c321206e15'
+

@@ -27,6 +27,7 @@ export interface IConfig {
     hosts: string[],
     versions: IVersion[],
     app_links: { android: string, ios: string }
+    bugsnag: { app_key: string }
 }
 
 export enum LoggerLevel {

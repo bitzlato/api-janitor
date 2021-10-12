@@ -45,6 +45,24 @@
  
     make deploy
 
+## Инкрементация версии проекта
+
+При выполнении скрипта инкрементации, создается коммит и тег с новой версией проекта.
+
+Инкрементация patch:
+
+      yarn version:patch
+
+Инкрементация minor:
+
+      yarn version:minor
+
+Инкрементация major:
+
+      yarn version:major
+
+
+
 ## Какие endpoint-ы предоставляет
 
 | Endpoint      |   Параметры      | Ответ   |Описание       |
@@ -66,7 +84,7 @@ Accept: application/json
 
 Пример успешного запроса. Обновление приложения не требуется:
 ```sh
-% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=3.0.1' \
+% curl -i 'localhost:8080/?platform=ios&osVersion=14&appVersion=3.0.1' \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
     
@@ -83,7 +101,7 @@ Keep-Alive: timeout=5
 
 Пример успешного запроса. Приложение устарело, но обновление не требуется:
 ```sh
-% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=3.0.0' \
+% curl -i 'localhost:8080/?platform=ios&osVersion=14&appVersion=3.0.0' \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 HTTP/1.1 200 OK
@@ -99,7 +117,7 @@ Keep-Alive: timeout=5
 
 Пример успешного запроса. Приложение устарело, требуется обновление:
 ```sh
-% curl -i 'localhost:8080/janitor?platform=ios&osVersion=14&appVersion=2.9.9' \
+% curl -i 'localhost:8080/?platform=ios&osVersion=14&appVersion=2.9.9' \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 HTTP/1.1 200 OK
@@ -115,7 +133,7 @@ Keep-Alive: timeout=5
 
 Пример запроса с ошибкой:
 ```sh
-% curl -i  'localhost:8080/janitor?platform=symbian&osVersion=14&appVersion=1.0.0' \
+% curl -i  'localhost:8080/?platform=symbian&osVersion=14&appVersion=1.0.0' \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 HTTP/1.1 400 Bad Request

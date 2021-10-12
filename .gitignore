@@ -4,3 +4,4 @@ build
 config/settings.yml
 .envrc
 log
+yarn-error.log

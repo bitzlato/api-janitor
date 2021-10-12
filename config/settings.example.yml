@@ -1,20 +1,23 @@
-hosts:
-    - http://foo.bar
+default:
+    hosts:
+        - http://foo.bar
 
-versions:
-    - version: '<1.0.0'
-      message: 'сообщение об устаревшей версии. требование обновиться'
-      blockApp: false
+    versions:
+        - version: '<1.0.0'
+          message: 'сообщение об устаревшей версии. требование обновиться'
+          blockApp: false
 
-    - version: 1.0.0
-      message: 'сообщение об устаревшей версии'
-      blockApp: false
+        - version: 1.0.0
+          message: 'сообщение об устаревшей версии'
+          blockApp: false
 
-    - version: 1.0.0
-      message: 'some message'
-      blockApp: false
+        - version: 1.0.0
+          message: 'some message'
+          blockApp: false
 
+    app_links:
+        android: android_play_market_link
+        ios: ios_app_store_link
 
-app_links:
-    android: android_play_market_link
-    ios: ios_app_store_link
+    bugsnag:
+        app_key: 'bugsnag_api_key'

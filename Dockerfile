@@ -3,4 +3,6 @@ WORKDIR /app
 COPY . .
 RUN yarn \
     && yarn run build
+
+CMD [ "node", "build/buildReporter.js"]
 CMD [ "node", "build/index.js", "--level info", "--port", "8080" ]

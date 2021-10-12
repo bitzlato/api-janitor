@@ -1,6 +1,7 @@
 .idea
 node_modules
 build
-config/settings.yml
+./config/settings.yml
 .envrc
 log
+yarn-error.log

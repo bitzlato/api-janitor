@@ -8,7 +8,7 @@ const config = getConfig()
 
 function janitor(app: Express) {
     app.get(
-        '/janitor',
+        '/',
         (req, res, next) => {
             const requestParams = req.query as unknown as IRequestParams
 

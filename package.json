@@ -5,7 +5,10 @@
   "scripts": {
     "build": "rm -rf build && tsc --build tsconfig.json",
     "start": "ts-node src/index.ts --port 8080",
-    "test": "NODE_ENV=UNIT_TEST jest --runInBand"
+    "test": "NODE_ENV=UNIT_TEST jest --runInBand",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
   },
   "author": "https://github.com/velsamm",
   "license": "ISC",

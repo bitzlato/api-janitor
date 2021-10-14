@@ -41,7 +41,7 @@
 
 ## Как задеплоить на сервер?
 
-Прописать [переменные окружения](https://direnv.net) `APP_USER` и `APP_HOST`
+Прописать [переменные окружения](https://direnv.net) `APP_USER`, `APP_HOST`, `APP_URL` и `BUGSNAG_API_KEY`
  
     make deploy
 

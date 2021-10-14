@@ -1,6 +1,6 @@
 default:
     hosts:
-        - http://foo.bar
+        - https://app_url
 
     versions:
         - version: '<1.0.0'

@@ -67,7 +67,8 @@
 
 | Endpoint      |   Параметры      | Ответ   |Описание       |
 | ------------- | -----------   | ------------- | --- |
-| GET /janitor      | <p>platform  - android или ios</p><p>osVersion - 13\14\15</p><p>appVersion - 3.0.0</p> | `` { appLink: string, message: string, blockApp: boolean, urls: string[] }`` | Проверка версии приложения, а также предоставление списка хостов для запросов |
+| GET /      | <p>platform  - android или ios</p><p>osVersion - 13\14\15</p><p>appVersion - 3.0.0</p> | `` { appLink: string, message: string, blockApp: boolean, urls: string[] }`` | Проверка версии приложения, а также предоставление списка хостов для запросов |
+| GET /version      |  | `` { version: string }`` | Версия самого приложения Janitor |
 
 <br />
 
